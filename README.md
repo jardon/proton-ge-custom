@@ -107,6 +107,7 @@ Environment variable options:
 |                       | <tt>WINE_FULLSCREEN_INTEGER_SCALING</tt> | Enable integer scaling mode, to give sharp pixels when upscaling. |
 | <tt>cmdlineappend:</tt>|                               | Append the string after the colon as an argument to the game command. May be specified more than once. Escape commas and backslashes with a backslash. |
 | <tt>seccomp</tt>      | <tt>PROTON_USE_SECCOMP</tt>    | Enable seccomp-bpf filter to emulate native syscalls, required for some DRM protections to work. |
+| <tt>async</tt>      | <tt>DXVK_ASYNC</tt>    | Allows Async to be used with DXVK. This can help with stutter in some games, however it is recommended not to be used with games that have sensitive anti-cheats. Use at your own risk. |
 
 ## Credits
 
@@ -174,6 +175,11 @@ simmons-public (Chris Simmons):
 https://github.com/simons-public/protonfixes  
 -creator of the original protonfixes  
 the portions of protonfixes I've imported are what allow customizations to be made to prefixes for various proton games. without proton fixes many games would still be broken and/or require manual prefix modification. Huge thanks to Chris.  
+
+Sporif (Amine Hassane)
+https://github.com/Sporif/dxvk-async
+-current maintainer of dxvk-async
+This is a feature that was originally removed from dxvk as it happened around the same time a few overwatch bans happened. It was thought, but never confirmed whether or not this feature caused the bans, so the feature was removed as a safety precaution. It is still safe to use in many single player games, and games that do not have competitive anti-cheats. It has also been confirmed to work safely in Warframe and Path of Exile.
 
 
 I also of course need to thank my fellow wine-staging maintainers:  

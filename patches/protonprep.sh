@@ -60,12 +60,16 @@
     git clean -xdf
     patch -Np1 < ../patches/dxvk/valve-dxvk-avoid-spamming-log-with-requests-for-IWineD3D11Texture2D.patch
     patch -Np1 < ../patches/dxvk/proton-add_new_dxvk_config_library.patch
+    patch -Np1 < ../patches/dxvk/dxvk-async.patch
     cd ..
 
     #WINE STAGING
     cd wine-staging
     git reset --hard HEAD
     git clean -xdf
+    
+#    # fixes RE3 loading crash
+    git patch -Np1 < /patches/wine-hotfixes/ntdll-WRITECOPY-revert.patch
 
     # fixes patching without rawinput
     patch -Np1 < ../patches/wine-hotfixes/staging-44d1a45-localreverts.patch    
@@ -137,19 +141,13 @@
     echo "origin downloads fix" 
     patch -Np1 < ../patches/game-patches/origin-downloads_fix.patch
 
-    echo "fix steep"
-    patch -Np1 < ../patches/wine-hotfixes/0001-Add-some-semi-stubs-in-user32.patch
+#    echo "fix steep"
+#    patch -Np1 < ../patches/wine-hotfixes/0001-Add-some-semi-stubs-in-user32.patch
 
 #   TODO: Check on this - don't own game. Need to validate
 #   TODO: Add game-specific check
     echo "NFSW launcher fix"
     patch -Np1 < ../patches/game-patches/NFSWLauncherfix.patch
-
-#   TODO: Check on this - don't own game. Need to validate.
-#   TODO: Add game-specific check
-    echo "gta4 input patch"
-    patch -Np1 < ../patches/game-patches/gta4_gamepad_workaround.patch
-
 
 # Currently applied but not working:
 
@@ -260,16 +258,17 @@
     patch -Np1 < ../patches/wine-hotfixes/D3D12SerializeVersionedRootSignature.patch
     patch -Np1 < ../patches/wine-hotfixes/D3D12CreateVersionedRootSignatureDeserializer.patch
 
-    echo "proton MF hacks"
-    patch -Np1 < ../patches/proton/proton-mf_hacks.patch
+    echo "guy's media foundation alpha patches"
+    patch -Np1 < ../patches/wine-hotfixes/media_foundation_alpha.patch
 
-    # WINE HOTFIXES
-    patch -Np1 < ../patches/wine-hotfixes/server-fix_setting_context_flags_in_get_thread_context.patch
+    echo "proton-specific manual mfplat dll register patch"
+    patch -Np1 < ../patches/wine-hotfixes/proton_mediafoundation_dllreg.patch
 
     #WINE CUSTOM PATCHES
     #add your own custom patch lines below
     patch -Np1 < ../patches/wine-hotfixes/user32-Set_PAINTSTRUCT_fErase_field_depending_on_the_last_WM_ERASEBKGND_result.patch
-    patch -Np1 < ../patches/wine-hotfixes/ntdll-Use_the_free_ranges_in_find_reserved_free_area.patch
+#    patch -Np1 < ../patches/wine-hotfixes/ntdll-Use_the_free_ranges_in_find_reserved_free_area.patch
+    patch -Np1 < ../patches/wine-hotfixes/dll_loader_fix.patch
 
     ./dlls/winevulkan/make_vulkan
     ./tools/make_requests
